@@ -28,8 +28,8 @@ SECRET_KEY = 'django-insecure-(jl9scg1=4(kp13*fp)@nss#*njp76*a3o=+%!$d4ei_^_jh*w
 DEBUG = True
 
 ALLOWED_HOSTS = [
-        'pure-waters-55483.herokuapp.com'
-        'reliableairrepair.herokuapp.com'
+        'pure-waters-55483.herokuapp.com',
+        'reliableairrepair.herokuapp.com',
         ]
 
 
