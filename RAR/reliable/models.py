@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth import get_user_model, authenticate, login
+from django.contrib.auth.models import User
 
 # Create your models here.
 class service(models.Model):
@@ -11,3 +13,5 @@ class service(models.Model):
 
     def __str__(self):
         return f"{self.timemade}"
+
+
