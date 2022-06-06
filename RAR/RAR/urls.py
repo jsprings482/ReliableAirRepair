@@ -20,5 +20,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('home/', include('reliable.urls'), name='home'),
     path( '', include( 'reliable.urls' ), name='home'),
-    path('pricing/', include( 'reliable.urls'), name='pricing'),
 ]
