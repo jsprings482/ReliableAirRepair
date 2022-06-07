@@ -105,7 +105,7 @@ def service(request):
             now = datetime.now()
             timemade = now.strftime("%m/%d/%Y %H%M%S")
             try:
-                service_call.save(username, fname, lname, phone, address, details, timemade)
+                service_call(username, fname, lname, phone, address, details, timemade).save()
             except:
                 return HttpResponse('Invalid Service Call Request. Please hit back and try again. Or call (469) 592-1148')
             message.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
