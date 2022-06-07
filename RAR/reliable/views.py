@@ -13,6 +13,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from .models import service_call
 from datetime import datetime
+import os, requests
 
 # Create your views here.
 def index(request):
@@ -102,8 +103,8 @@ def service(request):
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
             form.save()
-            TILL_URL=os.environ.get("TILL_URL")
-            requests.post(TILL_URL, json{
+            TILL_URL = os.environ.get("TILL_URL")
+            requests.post( TILL_URL, json{
                 "phone": ["+14695921148"],
                 "text": f"{service_call.first_name} {service_call.last_name}: {service_call.phone} | {service_call.address}---{service_call.details}"
                 })
