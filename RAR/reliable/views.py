@@ -53,7 +53,7 @@ def logon(request):
 
 def logout(request):
     auth.logout(request)
-    message.info(request, "You have successfully logged out. Goodbye.")
+    messageinfo(request, "You have successfully logged out. Goodbye.")
     return redirect("index")
 
 def password_reset(request):
@@ -80,9 +80,9 @@ def password_reset(request):
                         send_mail(subject, email, 'postmaster@sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org', [user.email], fail_silently=False)
                     except:
                         return HttpResponse('Invalid header found.')
-                    message.success(request, "A message with reset password instructions has been sent to your inbox.")
+                    messages.success(request, "A message with reset password instructions has been sent to your inbox.")
                     return redirect("password_reset/done")
-                message.error(request, "An invalid email has been entered.")
+                messages.error(request, "An invalid email has been entered.")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="reliable/password_reset.html", context={"password_reset_form":password_reset_form})
 
@@ -108,7 +108,7 @@ def service(request):
                 service_call.save()
             except:
                 return HttpResponse('Invalid Service Call Request. Please hit back and try again. Or call (469) 592-1148')
-            message.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
+            messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return redirect('index')
     form = RequestForm()
     return render(request, 'reliable/service.html', {"form":form})
