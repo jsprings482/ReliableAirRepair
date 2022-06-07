@@ -12,10 +12,11 @@ from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from .models import service_call
+from datetime import datetime
 
 # Create your views here.
 def index(request):
-    return render(request, 'reliable/index.html')
+   return render(request, 'reliable/index.html')
 
 def pricing(request):
     return render(request, 'reliable/pricing.html')
@@ -101,6 +102,7 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
+            service_call.timemade = str(datetime.now())
             try:
                 service_call.save()
             except:
