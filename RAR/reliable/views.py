@@ -26,7 +26,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registation successful.")
-            return redirect("{% url 'index' %}")
+            return redirect("index")
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
     form = NewUserForm()
     return render(request=request, template_name="reliable/create.html", context={"register_form":form})
@@ -41,7 +41,7 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("{% url 'index' %}")
+                return redirect("index")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -52,7 +52,7 @@ def logon(request):
 def logout(request):
     logout(request)
     message.info(request, "You have successfully logged out. Goodbye.")
-    return redirect("{% url 'index' %}")
+    return redirect("index")
 
 def password_reset(request):
     if request.method == "POST":
@@ -79,7 +79,7 @@ def password_reset(request):
                     except:
                         return HttpResponse('Invalid header found.')
                     message.success(request, "A message with reset password instructions has been sent to your inbox.")
-                    return redirect("{% url '/password_reset/done/' %}")
+                    return redirect("password_reset/done")
                 message.error(request, "An invalid email has been entered.")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="reliable/password_reset.html", context={"password_reset_form":password_reset_form})
