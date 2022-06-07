@@ -29,11 +29,11 @@ class RequestForm(forms.ModelForm):
         super(RequestForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
-                Field('fname', label="First Name"),
-                Field('lname', label="Last Name"),
-                Field('phone', label="Phone Number"),
-                Field('address', placeholder="Address"),
-                Field('details', cols="5", label="Describe the problem"),
+                Field('First Name', id="fname"),
+                Field('Last Nam,e', id="lname"),
+                Field('Phone Number', id = "phone"),
+                Field('Address', id = "address"),
+                Field('Describe the problem...', cols="5", id="details"),
                 ButtonHolder(
                     Submit('submit', "Submit"),
                     )
