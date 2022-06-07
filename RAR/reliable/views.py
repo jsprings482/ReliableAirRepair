@@ -93,8 +93,8 @@ def service(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
-            service_call.first_name = form.cleaned_data.get('fname')
-            service_call.last_name = form.cleaned_data.get('lname')
+            service_call.first_name = form.cleaned_data.get('first_name')
+            service_call.last_name = form.cleaned_data.get('last_name')
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
