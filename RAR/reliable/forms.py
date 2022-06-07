@@ -26,7 +26,7 @@ class RequestForm(forms.ModelForm):
         fields = ( "fname", "lname", "phone", "address", "details")
 
     def __init__(self, *args, **kwargs):
-        super(LoginForm, self).__init__(*args, **kwargs)
+        super(RequestForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.layout = Layout(
                 Field('fname', placeholder="First Name"),
