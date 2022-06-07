@@ -102,6 +102,11 @@ def service(request):
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
             form.save()
+            TILL_URL=os.environ.get("TILL_URL")
+            requests.post(TILL_URL, json{
+                "phone": ["+14695921148"],
+                "text": f"{service_call.first_name} {service_call.last_name}: {service_call.phone} | {service_call.address}---{service_call.details}"
+                })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return redirect('index')
     form = RequestForm()
