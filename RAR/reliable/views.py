@@ -102,7 +102,7 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
-            now = datetime.datetime.now()
+            now = datetime.now()
             service_call.timemade = str(now)
             try:
                 service_call.save()
