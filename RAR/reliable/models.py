@@ -11,5 +11,10 @@ class service_call(models.Model):
     details = models.TextField(max_length=500)
     timemade = models.DateTimeField()
 
+    def __init__(self, first_name, last_name, timemade):
+        self.first_name = first_name
+        self.last_name = last_name
+        self.timemade = timemade
+
     def __str__(self):
-        return f"[{self.timemade}]: {self.fname} {self.lname}"
+        return f"[{self.timemade}]: {self.first_name} {self.last_name}"
