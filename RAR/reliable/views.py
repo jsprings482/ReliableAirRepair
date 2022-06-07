@@ -93,7 +93,7 @@ def service(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
-            if request.user.is_authenticated():
+            if request.user.is_authenticated == True:
                 service_call.username = request.user.username
             else:
                 service_call.username = "Anonymous"
