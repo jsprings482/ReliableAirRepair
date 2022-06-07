@@ -26,4 +26,5 @@ class LoginForm(AuthenticationForm):
         user = super(LoginForm, self)
         user.username = self.cleaned_data['username']
         user.password = self.cleaned_data['password1']
-        return user = authenticate(user.username, user.password)
+        user = authenticate(user.username, user.password)
+        return user
