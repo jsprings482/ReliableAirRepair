@@ -33,9 +33,11 @@ def register(request):
 
 def logon(request):
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        form = AuthenticationForm(None, request.POST)
         if form.is_valid():
-            user = LoginForm.login()
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
@@ -45,7 +47,7 @@ def logon(request):
         else:
             messages.error(request, "Invalid username or password.")
     form = AuthenticationForm()
-    return render(request, 'reliable/login.html')
+    return render(request, 'reliable/login.html', {'form': form})
 
 def logout(request):
     logout(request)

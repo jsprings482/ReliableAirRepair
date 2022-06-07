@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
+from crispy_forms.helper import FormHelper
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -17,14 +18,11 @@ class NewUserForm(UserCreationForm):
         return user
 
 class LoginForm(AuthenticationForm):
-    
-    class Meta:
-        model = User
-        fields = ("username", "password1")
-
-    def login(self):
-        user = super(LoginForm, self)
-        user.username = self.cleaned_data['username']
-        user.password = self.cleaned_data['password1']
-        user = authenticate(user.username, user.password)
-        return user
+    def __init__(self, *args, **kwargs):
+        super(LoginForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+                Field('username', placeholder="username"),
+                Field('password', placeholder="password"),
+            )
