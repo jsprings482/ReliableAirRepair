@@ -66,7 +66,7 @@ def password_reset(request):
                     email_template_name = 'reliable/password_reset_email.txt'
                     c = {
                             "email": user.email,
-                            "domain": 'sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org'
+                            "domain": 'sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org',
                             "site_name": 'reliableairrepair.herokuapp.com',
                             "uid": urlsafe_base64_encode(force_bytes(user.pk)),
                             "user": user,
