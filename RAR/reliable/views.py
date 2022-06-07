@@ -102,8 +102,8 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
-            now = datetime.now()
-            service_call.timemade = now.strftime("%m/%d/%Y %H%M%S")
+            now = datetime.datetime.now()
+            service_call.timemade = str(now)
             try:
                 service_call.save()
             except:
