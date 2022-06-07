@@ -15,3 +15,15 @@ class NewUserForm(UserCreationForm):
         if commit:
                 user.save()
         return user
+
+class LoginForm(AuthenticationForm):
+    
+    class Meta:
+        model = User
+        fields = ("username", "password1")
+
+    def login(self):
+        user = super(LoginForm, self)
+        user.username = self.cleaned_data['username']
+        user.password = self.cleaned_data['password1']
+        return user = authenticate(user.username, user.password)
