@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
-from .forms import NewUserForm, LoginForm
+from .forms import NewUserForm, RequestForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
@@ -11,6 +11,8 @@ from django.db.models.query_utils import Q
 from django.utils.http import urlsafe_base64_encode
 from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
+from .models import service
+from datetime import datetime
 
 # Create your views here.
 def index(request):
@@ -86,3 +88,27 @@ def password_reset(request):
 
 def user_dashboard(request):
     return render(request, 'reliable/user.html')
+
+def service(request):
+    if request.method == "POST":
+        form = RequestForm(request.POST)
+        if form.is_valid():
+            if request.user is not None:
+                username = request.user.username
+            else:
+                username = "Anonymous"
+            fname = form.cleaned_data.get('fname')
+            lname = form.cleaned_data.get('lname')
+            phone = form.cleaned_data.get('phone')
+            address = form.cleaned_data.get('address')
+            details = form.cleaned_data.get('details')
+            now = datetime.now()
+            timemade = now.strftime("%m/%d/%Y %H%M%S")
+            try:
+                service_call.save(username, fname, lname, phone, address, details, timemade)
+            except:
+                return HttpResponse('Invalid Service Call Request. Please hit back and try again. Or call (469) 592-1148')
+            message.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
+            return redirect('index')
+    form = RequestForm()
+    return render(request, 'reliable/service.html', {"form":form})

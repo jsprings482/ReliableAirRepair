@@ -1,7 +1,9 @@
 from django import forms
+from .models import service_call
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Submit, Layout, Fieldset, ButtonHolder
 
 class NewUserForm(UserCreationForm):
     email = forms.EmailField(required=True)
@@ -17,12 +19,22 @@ class NewUserForm(UserCreationForm):
                 user.save()
         return user
 
-class LoginForm(AuthenticationForm):
+class RequestForm(forms.ModelForm):
+
+    class Meta:
+        model = service_call
+        fields = ( "fname", "lname", "phone", "address", "details")
+
     def __init__(self, *args, **kwargs):
         super(LoginForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
-        self.helper.form_tag = False
         self.helper.layout = Layout(
-                Field('username', placeholder="username"),
-                Field('password', placeholder="password"),
-            )
+                Field('fname', placeholder="First Name"),
+                Field('lname', placeholder="Last Name"),
+                Field('phone', placeholder="Phone Number"),
+                Field('address', placeholder="Address"),
+                Field('details', placeholder="Describe the problem", cols="5"),
+                ButtonHolder(
+                    Submit('submit', "Submit"),
+                    )
+                )
