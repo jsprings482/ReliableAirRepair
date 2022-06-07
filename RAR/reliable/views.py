@@ -29,7 +29,7 @@ def register(request):
             return redirect("reliable:index")
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
     form = NewUserForm()
-    return render(request=request, template_name="reliable/create.html", contect={"register_form":form})
+    return render(request=request, template_name="reliable/create.html", context={"register_form":form})
 
 def logon(request):
     if request.method == "POST":

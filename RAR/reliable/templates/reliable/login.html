@@ -4,7 +4,7 @@
 
 <div class="container" style="padding: 5%">
     <h1 class="w3-jumbo w3-center" style:"text-shadow: 2px 2px 5px #c0c0ff;">Login</h1>
-    <form method="POST">
+    <form method="POST" class="uniForm">
         {% csrf_token %}
         {{ login_form|crispy }}
         <button class="w3-btn w3-blue" type:"submit">Login</button>
