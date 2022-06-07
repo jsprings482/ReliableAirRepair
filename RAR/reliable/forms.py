@@ -23,7 +23,7 @@ class RequestForm(forms.ModelForm):
 
     class Meta:
         model = service_call
-        fields = ( "fname", "lname", "phone", "address", "details")
+        fields = ( "first_name", "last_name", "phone", "address", "details")
 
     def __init__(self, *args, **kwargs):
         super(RequestForm, self).__init__(*args, **kwargs)
