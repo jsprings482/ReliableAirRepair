@@ -3,7 +3,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse
 from .forms import NewUserForm, RequestForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
@@ -52,7 +52,7 @@ def logon(request):
     return render(request, 'reliable/login.html', {'form': form})
 
 def logout(request):
-    logout(request)
+    auth.logout(request)
     message.info(request, "You have successfully logged out. Goodbye.")
     return redirect("index")
 
@@ -97,15 +97,15 @@ def service(request):
                 username = request.user.username
             else:
                 username = "Anonymous"
-            fname = form.cleaned_data.get('fname')
-            lname = form.cleaned_data.get('lname')
-            phone = form.cleaned_data.get('phone')
-            address = form.cleaned_data.get('address')
-            details = form.cleaned_data.get('details')
+            service_call.first_name = form.cleaned_data.get('fname')
+            service_call.last_name = form.cleaned_data.get('lname')
+            service_call.phone = form.cleaned_data.get('phone')
+            service_call.address = form.cleaned_data.get('address')
+            service_call.details = form.cleaned_data.get('details')
             now = datetime.now()
-            timemade = now.strftime("%m/%d/%Y %H%M%S")
+            service_call.timemade = now.strftime("%m/%d/%Y %H%M%S")
             try:
-                service_call(username, fname, lname, phone, address, details, timemade).save()
+                service_call.save()
             except:
                 return HttpResponse('Invalid Service Call Request. Please hit back and try again. Or call (469) 592-1148')
             message.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
