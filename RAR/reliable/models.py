@@ -9,4 +9,4 @@ class service_call(models.Model):
     phone = models.CharField(max_length=20)
     address = models.CharField(max_length=100)
     details = models.TextField(max_length=500)
-    datetime = models.DateTimeField(auto_add_now=True)
+    datetime = models.DateTimeField(auto_now_add=True)
