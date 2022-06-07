@@ -98,7 +98,7 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
-            service_call.save()
+            form.save()
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return redirect('index')
     form = RequestForm()
