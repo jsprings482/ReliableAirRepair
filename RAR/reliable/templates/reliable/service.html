@@ -1,4 +1,14 @@
 {% extends 'reliable/layout.html' %}
 {% block body %}
+{% load crispy_forms_tags %}
 
+<div class="container" style="padding: 5%">
+    <h1 class="w3-jumbo w3-center" style:"text-shadow: 2px 2px 5px #c0c0ff;">Request a Service Call</h1>
+    <form method="POST" class="w3-large uniForm">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <button class="w3-btn w3-blue" type="submit">Register</button>
+    </form>
+    <p class="w3-xxlarge w3-center">If you already have an account, click <a href="{% url 'logon' %}">here</a> to login.
+</div>
 {% endblock %}
