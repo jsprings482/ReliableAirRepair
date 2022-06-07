@@ -75,7 +75,7 @@ def password_reset(request):
                             }
                     email = render_to_string(email_template_name, c)
                     try:
-                        send_mail(subject, email, 'noreply@sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org', [user.email], fail_silently=False)
+                        send_mail(subject, email, 'postmaster@sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org', [user.email], fail_silently=False)
                     except:
                         return HttpResponse('Invalid header found.')
                     message.success(request, "A message with reset password instructions has been sent to your inbox.")
@@ -84,3 +84,5 @@ def password_reset(request):
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="reliable/password_reset.html", context={"password_reset_form":password_reset_form})
 
+def user_dashboard(request):
+    return render(request, 'reliable/user.html')
