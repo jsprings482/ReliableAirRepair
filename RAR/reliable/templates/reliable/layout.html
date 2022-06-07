@@ -53,7 +53,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Lobster", cursive}
     <p>{{ user.username }}</p>
   </a>
   {% else %}
-  <a href="{% url 'register' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
+  <a href="{% url 'logon' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-user w3-xxlarge"></i>
     <p>LOGIN</p>
   </a>
@@ -66,7 +66,11 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Lobster", cursive}
     <a href="{% url 'index' %}" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
     <a href="{% url 'pricing' %}" class="w3-bar-item w3-button" style="width:25% !important">PRICING</a>
     <a href="#photos" class="w3-bar-item w3-button" style="width:25% !important">REQUEST</a>
-    <a href="#contact" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'user_dashboard' %}" class="w3-bar-item w3-button" style="width:25% !important">{{ user.username }}</a>
+    {% else %}
+    <a href="{% url 'logon' %}" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    {% endif %}
   </div>
 </div>
 <div class="w3-padding-large" id="main">
