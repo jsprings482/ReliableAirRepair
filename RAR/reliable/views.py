@@ -26,7 +26,7 @@ def register(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registation successful.")
-            return redirect("reliable:index")
+            return redirect("{% url 'index' %}")
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
     form = NewUserForm()
     return render(request=request, template_name="reliable/create.html", context={"register_form":form})
@@ -41,7 +41,7 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("reliable:index")
+                return redirect("{% url 'index' %}")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -52,7 +52,7 @@ def logon(request):
 def logout(request):
     logout(request)
     message.info(request, "You have successfully logged out. Goodbye.")
-    return redirect("reliable:index")
+    return redirect("{% url 'index' %}")
 
 def password_reset(request):
     if request.method == "POST":
