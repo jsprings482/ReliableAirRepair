@@ -149,3 +149,4 @@ EMAIL_HOST = 'smtp.mailgun.org'
 EMAIL_PORT = '587'
 EMAIL_HOST_USER = 'postmaster@sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org'
 EMAIL_HOST_PASSWORD = '895ace1494344578049bc10561b26a7f-523596d9-9f677b7a'
+EMAIL_USE TLS = True
