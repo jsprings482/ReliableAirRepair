@@ -58,7 +58,7 @@ def logon(request):
 def logout(request):
     auth.logout(request)
     messages.info(request, "You have successfully logged out. Goodbye.")
-    return redirect"index")
+    return redirect("index")
 
 def password_reset(request):
     if request.method == "POST":
