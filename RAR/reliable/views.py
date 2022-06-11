@@ -112,6 +112,14 @@ def user_dashboard(request):
     return render(request, 'reliable/user.html')
 
 def service(request):
+    TILL_URL = os.environ.get("TILL_URL")
+    PUSHER_URL = os.environ.get("PUSHER_URL")
+    PUSHER_URL_CHUNKS = PUSHER_URL.split("http://")[1].split(":")
+    PUSHER_KEY = PUSHER_URL_CHUNKS[0]
+    PUSHER_SECRET = PUSHER_URL_CHUNKS[1].split("@")[0]
+    PUSHER_APP_ID = PUSHER_URL_CHUNKS[1].split("@")[1].split("/")[2]
+    app = Flask(__name__)
+    pusher = Pusher(app_id=PUSHER_APP_ID, key=PUSHER_KEY, secret=PUSHER_SECRET)
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
@@ -121,18 +129,21 @@ def service(request):
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
             form.save()
-            TILL_URL = os.environ.get("TILL_URL")
             requests.post(TILL_URL, json={
             "phone": ["14695921148"],
             "method": "SMS",
             "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}",
             "tag": "New Service Call",
             "responses": ["Received", "Ignore"],
-            "webhook": "https://reliableairrepair.herokuapp.com/",
+            "webhook": "%s?uuid=%s" % (request.form["https://reliableairrepair.herokuapp.com"], request.form["uuid"]),
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return HttpResponseRedirect(reverse('reliable:index'), {
             "message": "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly."
                 })
     form = RequestForm()
-    return render(request, 'reliable/service.html', {"form":form})
+    return render(request, 'reliable/service.html', {
+        "form": form,
+        "uuid": str(uuid.uuid4()),
+        "pusher_token": PUSHER_KEY
+        })
