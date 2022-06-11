@@ -41,7 +41,7 @@ def register(request):
         "message": "Registration unsuccessful, please check your information and try again."
             })
     form = NewUserForm()
-    return render(request=request, template_name="reliable/create.html", context={"register_form":form})
+    return render(request=request, template_name="reliable/register.html", context={"register_form":form})
 
 def logon(request):
     if request.method == "POST":
