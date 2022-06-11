@@ -137,6 +137,4 @@ def service(request):
     form = RequestForm()
     return render(request, 'reliable/service.html', {
         "form": form,
-        "uuid": str(uuid.uuid4()),
-        "pusher_token": PUSHER_KEY
         })
