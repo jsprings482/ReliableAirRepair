@@ -37,7 +37,7 @@ def register(request):
             "message": "Registration successful."
                 })
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
-        return HttpResponseRedirect(reverse("reliable:register"), {
+        return HttpResponseRedirect(reverse("reliable:index"), {
         "message": "Registration unsuccessful, please check your information and try again."
             })
     form = NewUserForm()
