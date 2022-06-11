@@ -113,13 +113,6 @@ def user_dashboard(request):
 
 def service(request):
     TILL_URL = os.environ.get("TILL_URL")
-    PUSHER_URL = os.environ.get("PUSHER_URL")
-    PUSHER_URL_CHUNKS = PUSHER_URL.split("http://")[1].split(":")
-    PUSHER_KEY = PUSHER_URL_CHUNKS[0]
-    PUSHER_SECRET = PUSHER_URL_CHUNKS[1].split("@")[0]
-    PUSHER_APP_ID = PUSHER_URL_CHUNKS[1].split("@")[1].split("/")[2]
-    app = Flask(__name__)
-    pusher = Pusher(app_id=PUSHER_APP_ID, key=PUSHER_KEY, secret=PUSHER_SECRET)
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
