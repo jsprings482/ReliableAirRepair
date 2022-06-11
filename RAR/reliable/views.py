@@ -33,11 +33,11 @@ def register(request):
             user = User.objects.create_user(uname, email, passw)
             login(request, user)
             messages.success(request, "Registation successful.")
-            return HttpResponseRedirect("reliable:index", {
+            return HttpResponseRedirect(reverse("reliable:index"), {
                 "message": "Registration successful."
                 })
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
-        return HttpResponseRedirect("reliable:register", {
+        return HttpResponseRedirect(reverse("reliable:register"), {
             "message": "Registration unsuccessful, please check your information and try again."
             })
     form = NewUserForm()
@@ -53,17 +53,17 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return HttpResponseRedirect("reliable:index", {
+                return HttpResponseRedirect(reverse("reliable:index"), {
                     "message": "You are now logged in as {username}."
                     })
             else:
                 messages.error(request, "Invalid username or password.")
-                return HttpResponseRedirect("reliable:logon", {
+                return HttpResponseRedirect(reverse("reliable:logon"), {
                     "message": "Invalid username or password."
                     })
         else:
             messages.error(request, "Invalid username or password.")
-            return HttpResponseRedirect("reliable:logon", {
+            return HttpResponseRedirect(reverse("reliable:logon"), {
                 "message": "Invalid username or password."
                 })
     form = AuthenticationForm()
@@ -72,7 +72,7 @@ def logon(request):
 def logout(request):
     auth.logout(request)
     messages.info(request, "You have successfully logged out. Goodbye.")
-    return HttpResponseRedirect("reliable:index", {
+    return HttpResponseRedirect(reverse("reliable:index"), {
         "message": "You have successfully logged out."
         })
 
@@ -125,7 +125,7 @@ def service(request):
             "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}"
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
-            return HttpResponseRedirect('reliable:index', {
+            return HttpResponseRedirect(reverse('reliable:index'), {
                 "message": "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly."
                 })
     form = RequestForm()
