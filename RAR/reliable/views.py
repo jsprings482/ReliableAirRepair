@@ -135,7 +135,7 @@ def service(request):
             "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}",
             "tag": "New Service Call",
             "responses": ["Received", "Ignore"],
-            "webhook": "%s?uuid=%s" % (request.form["https://reliableairrepair.herokuapp.com"], request.form["uuid"]),
+            "webhook": "https://reliableairrepair.herokuapp.com",
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return HttpResponseRedirect(reverse('reliable:index'), {
