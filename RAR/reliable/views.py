@@ -33,7 +33,7 @@ def register(request):
             user = User.objects.create_user(uname, email, passw)
             login(request, user)
             messages.success(request, "Registation successful.")
-            return HttpResponseRedirect(reverse("index"), message: 'Registration successful')
+            return redirect("index")
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
     form = NewUserForm()
     return render(request=request, template_name="reliable/create.html", context={"register_form":form})
@@ -48,7 +48,7 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return HttpResponseRedirect(reverse("index"), message: 'You are now logged in as {username}.')
+                return redirect("index")
             else:
                 messages.error(request, "Invalid username or password.")
         else:
@@ -59,7 +59,7 @@ def logon(request):
 def logout(request):
     auth.logout(request)
     messages.info(request, "You have successfully logged out. Goodbye.")
-    return HttpResponseRedirect(reverse("index"), message:'You have successfully logged out. Goodbye.')
+    return redirect"index")
 
 def password_reset(request):
     if request.method == "POST":
@@ -86,7 +86,7 @@ def password_reset(request):
                     except:
                         return HttpResponse('Invalid header found.')
                     messages.success(request, "A message with reset password instructions has been sent to your inbox.")
-                    return HttpResponseRedirect(reverse("password_reset/done"), message: 'A message with reset password instructions has been sent to your inbox.')
+                    return redirect("password_reset/done")
                 messages.error(request, "An invalid email has been entered.")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="reliable/password_reset.html", context={"password_reset_form":password_reset_form})
@@ -110,6 +110,6 @@ def service(request):
             "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}"
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
-            return HttpResponseRedirect(reverse('index'), message:'Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.')
+            return redirect('index')
     form = RequestForm()
     return render(request, 'reliable/service.html', {"form":form})
