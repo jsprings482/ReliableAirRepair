@@ -1,6 +1,8 @@
 {% extends 'reliable/layout.html' %}
 {% block body %}
-
+{% if message then %}
+    <div class="w3-center w3-panel w3-xlarge">{{ message }}</div>
+{% endif %}
   <!-- Header/Home -->
   <header class="w3-container w3-padding-32 w3-center w3transparent" id="home">
     <h1 class="w3-jumbo" style="text-shadow: 2px 2px 5px #a0a0ff;">Reliable Air Repair</h1>

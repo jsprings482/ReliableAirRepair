@@ -34,25 +34,25 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Lobster", cursive}
 <nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
   <!-- Avatar image in top left corner -->
   <img src="https://i.ibb.co/S71cQ1P/Logo.png" style="width:100%">
-  <a href="{% url 'index' %}" class="w3-bar-item w3-button w3-padding-large w3-white">
+  <a href="{% url 'reliable:index' %}" class="w3-bar-item w3-button w3-padding-large w3-white">
     <i class="fa fa-home w3-xxlarge"></i>
     <p>HOME</p>
   </a>
-  <a href="{% url 'pricing' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
+  <a href="{% url 'reliable:pricing' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-usd w3-xxlarge"></i>
     <p>PRICING</p>
   </a>
-  <a href="{% url 'service' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
+  <a href="{% url 'reliable:service' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-phone w3-xxlarge"></i>
     <p>REQUEST</p>
   </a>
   {% if user.is_authenticated %}
-  <a href="{% url 'user_dashboard' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
+  <a href="{% url 'reliable:user_dashboard' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-user w3-xxlarge"></i>
     <p>{{ user.username }}</p>
   </a>
   {% else %}
-  <a href="{% url 'logon' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
+  <a href="{% url 'reliable:logon' %}" class="w3-bar-item w3-button w3-padding-large w3-hover-white">
     <i class="fa fa-user w3-xxlarge"></i>
     <p>LOGIN</p>
   </a>
@@ -62,13 +62,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Lobster", cursive}
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="{% url 'index' %}" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
-    <a href="{% url 'pricing' %}" class="w3-bar-item w3-button" style="width:25% !important">PRICING</a>
-    <a href="{% url 'service' %}" class="w3-bar-item w3-button" style="width:25% !important">REQUEST</a>
+    <a href="{% url 'reliable:index' %}" class="w3-bar-item w3-button" style="width:25% !important">HOME</a>
+    <a href="{% url 'reliable:pricing' %}" class="w3-bar-item w3-button" style="width:25% !important">PRICING</a>
+    <a href="{% url 'reliable:service' %}" class="w3-bar-item w3-button" style="width:25% !important">REQUEST</a>
     {% if user.is_authenticated %}
-    <a href="{% url 'user_dashboard' %}" class="w3-bar-item w3-button" style="width:25% !important">{{ user.username }}</a>
+    <a href="{% url 'reliable:user_dashboard' %}" class="w3-bar-item w3-button" style="width:25% !important">{{ user.username }}</a>
     {% else %}
-    <a href="{% url 'logon' %}" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
+    <a href="{% url 'reliable:logon' %}" class="w3-bar-item w3-button" style="width:25% !important">LOGIN</a>
     {% endif %}
   </div>
 </div>
@@ -77,11 +77,10 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Lobster", cursive}
 		{% endblock %}
     <!-- Footer -->
   <footer class="w3-content w3-padding-64 w3-text-grey w3-xlarge">
-    <i class="fa fa-facebook-official w3-hover-opacity"></i>
-    <i class="fa fa-instagram w3-hover-opacity"></i>
-    <i class="fa fa-snapchat w3-hover-opacity"></i>
-    <i class="fa fa-twitter w3-hover-opacity"></i>
-    <i class="fa fa-linkedin w3-hover-opacity"></i>
+    <a href="https://www.facebook.com/profile.php?id=100074587540902"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+    <a href="https://www.instagram.com/jsprings482"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+    <a href="https://twitter.com/SpringsJeffery"><i class="fa fa-twitter w3-hover-opacity"></i></a>
+    <a href="https://www.linkedin.com/in/jeffery-springs-157b4523b/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
   <!-- End footer -->
   </footer>
 

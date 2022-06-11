@@ -1,6 +1,6 @@
 from django.urls import path, include
 from . import views
-
+app_name = "reliable"
 urlpatterns = [
     path('', views.index, name= 'index'),        
     path('pricing/', views.pricing, name= 'pricing'),
