@@ -1,7 +1,7 @@
 {% extends 'reliable/layout.html' %}
 {% block body %}
 {% load crispy_forms_tags %}
-{% if message then %}
+{% if message %}
     <div class="w3-center w3-panel w3-xlarge">{{ message }}</div>
 {% endif %}
 <div class="container" style="padding: 5%">
