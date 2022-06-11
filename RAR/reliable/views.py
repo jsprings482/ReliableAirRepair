@@ -118,7 +118,7 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
-            form.save()
+            service_call.save()
             TILL_URL = os.environ.get("TILL_URL")
             requests.post(TILL_URL, json={
             "phone": ["14695921148"],
