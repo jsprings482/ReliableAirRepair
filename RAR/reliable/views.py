@@ -129,7 +129,7 @@ def service(request):
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
             form.save()
-            requests.post(TILL_URL, json={
+            resp = requests.post(TILL_URL, json={
             "phone": ["14695921148"],
             "method": "SMS",
             "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}",
