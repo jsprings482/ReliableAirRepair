@@ -34,11 +34,11 @@ def register(request):
             login(request, user)
             messages.success(request, "Registation successful.")
             return HttpResponseRedirect(reverse("reliable:index"), {
-                "message": "Registration successful."
+            "message": "Registration successful."
                 })
         messages.error(request, "Registration unsuccessful, please check your information and try again.")
         return HttpResponseRedirect(reverse("reliable:register"), {
-            "message": "Registration unsuccessful, please check your information and try again."
+        "message": "Registration unsuccessful, please check your information and try again."
             })
     form = NewUserForm()
     return render(request=request, template_name="reliable/create.html", context={"register_form":form})
@@ -54,17 +54,17 @@ def logon(request):
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
                 return HttpResponseRedirect(reverse("reliable:index"), {
-                    "message": "You are now logged in as {username}."
+                "message": "You are now logged in as {username}."
                     })
             else:
                 messages.error(request, "Invalid username or password.")
                 return HttpResponseRedirect(reverse("reliable:logon"), {
-                    "message": "Invalid username or password."
+                "message": "Invalid username or password."
                     })
         else:
             messages.error(request, "Invalid username or password.")
             return HttpResponseRedirect(reverse("reliable:logon"), {
-                "message": "Invalid username or password."
+            "message": "Invalid username or password."
                 })
     form = AuthenticationForm()
     return render(request, 'reliable/login.html', {'form': form})
@@ -73,7 +73,7 @@ def logout(request):
     auth.logout(request)
     messages.info(request, "You have successfully logged out. Goodbye.")
     return HttpResponseRedirect(reverse("reliable:index"), {
-        "message": "You have successfully logged out."
+    "message": "You have successfully logged out."
         })
 
 def password_reset(request):
@@ -126,7 +126,7 @@ def service(request):
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return HttpResponseRedirect(reverse('reliable:index'), {
-                "message": "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly."
+            "message": "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly."
                 })
     form = RequestForm()
     return render(request, 'reliable/service.html', {"form":form})
