@@ -13,8 +13,10 @@ from django.contrib.auth.tokens import default_token_generator
 from django.utils.encoding import force_bytes
 from .models import service_call
 from datetime import datetime
-import os, requests
+import os, requests, json, uuid
 from django.urls import reverse
+from flask import Flask, render_template, jsonify, request
+from pusher import Pusher
 
 # Create your views here.
 def index(request):
