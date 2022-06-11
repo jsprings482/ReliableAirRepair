@@ -130,7 +130,7 @@ def service(request):
                  "tag" : "alert_info",
                  "responses" : ["OK!", "Busy", "Ignore"],
                  "webhook" : "https://reliableairrepair.herokuapp.com/service"
-                 }]
+                 }],
             "conclussion" : "Thank you for responding!",
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
