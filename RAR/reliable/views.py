@@ -122,7 +122,11 @@ def service(request):
             TILL_URL = os.environ.get("TILL_URL")
             requests.post(TILL_URL, json={
             "phone": ["14695921148"],
-            "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}"
+            "method": "SMS",
+            "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}",
+            "tag": "New Service Call",
+            "responses": ["Received", "Ignore"],
+            "webhook": "https://reliableairrepair.herokuapp.com/",
             })
             messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return HttpResponseRedirect(reverse('reliable:index'), {
