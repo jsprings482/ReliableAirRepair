@@ -2,7 +2,7 @@
 {% block body %}
 {% load crispy_forms_tags %}
 {% if message %}
-    <div class="w3-center w3-panel w3-xlarge">{{ message }}</div>
+    <div class="w3-center w3-panel w3-xlarge">{% message %}</div>
 {% endif %}
 <div class="container" style="padding: 5%">
     <h1 class="w3-jumbo w3-center" style:"text-shadow: 2px 2px 5px #c0c0ff;">Register New User</h1>

@@ -18,6 +18,11 @@ from django.urls import reverse
 from flask import Flask, render_template, jsonify, request
 from pusher import Pusher
 
+PUSHER_APP_ID = "1422169"
+PUSHER_KEY = "1086b16567ad10c5f184"
+PUSHER_SECRET = "4eb8dc0bdc52cff625a4"
+PUSHER_CLUSTER = "mt1"
+
 # Create your views here.
 def index(request):
    return render(request, 'reliable/index.html')
@@ -116,15 +121,23 @@ def service(request):
     if request.method == "POST":
         form = RequestForm(request.POST)
         if form.is_valid():
+            pusher = Pusher(PUSHER_APP_ID, PUSHER_KEY, PUSHER_SECRET, PUSHER_CLUSTER)
             service_call.first_name = form.cleaned_data.get('first_name')
             service_call.last_name = form.cleaned_data.get('last_name')
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
+            pusher.trigger('ReliableAirRepair', 'ServiceCall', {
+                'Customer Name': f"{service_call.first_name} {service_call.last_name}",
+                'Phone Number': service_call.phone,
+                'Address' : service_call.address,
+                'Details': service_call.details,
+                })
             form.save()
             resp = requests.post(TILL_URL, json={
             "phone": ["14695921148"],
             "method": "SMS",
+            "tag" : "service_call",
             "questions": [{
                  "text" : f"{service_call.first_name} : {service_call.phone}|{service_call.address}---{service_call.details}",
                  "tag" : "alert_info",
