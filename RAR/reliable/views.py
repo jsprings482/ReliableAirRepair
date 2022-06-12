@@ -55,7 +55,7 @@ def logon(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                message = "You are now logged in as {username}."
+                message = f"You are now logged in as {username}."
                 return render(request, "reliable/index.html", { 'msg' : message })
             else:
                 message =  "Invalid username or password."
