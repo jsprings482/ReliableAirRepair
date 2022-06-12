@@ -4,11 +4,11 @@
 <div class="container" style="padding: 5%">
     <h1 class="w3-jumbo w3-center" style:"text-shadow: 2px 2px 5px #c0c0ff;">Register New User</h1>
     <p class="w3-xlarge">{{ msg }}</p>
-    <form method="POST" class="w3-large uniForm">
+    <form method="POST" class="w3-large uniForm" style="font-family: 'Lucida Console', monospace">
         {% csrf_token %}
         {{ register_form|crispy }}
         <button class="w3-btn w3-blue" type="submit">Register</button>
     </form>
-    <p class="w3-xxlarge w3-center">If you already have an account, click <a href="{% url 'reliable:logon' %}">here</a> to login.
+    <p class="w3-xxlarge w3-center" style="font-family: 'Lucida Console', monospace">If you already have an account, click <a href="{% url 'reliable:logon' %}">here</a> to login.
 </div>
 {% endblock %}

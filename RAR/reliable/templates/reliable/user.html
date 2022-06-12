@@ -2,9 +2,10 @@
 {% block body %}
 <div class="w3-center">
 	<p class="w3-jumbo" style="text-shadow: 2px 2px 5px #a0a0ff; padding-bottom:5%">User Information</p>
-	<p class="w3-xlarge">Username: {{ user.username }}</p>
-	<p class="w3-xlarge">Email: {{ user.email }}</p>
-	<br>
-	<p class="w3-xxlarge">Click here to <a href="{% url 'reliable:logout' %}">Logout</a>.</p>
+	<hr>
+	<p class="w3-xlarge" style="font-family: 'Lucida Console', monospace">Username: {{ user.username }}</p>
+	<p class="w3-xlarge" style="font-family: 'Lucida Console', monospace">Email: {{ user.email }}</p>
+	<hr>
+	<p class="w3-xxlarge" style="font-family: 'Lucida Console', monospace">Click here to <a href="{% url 'reliable:logout' %}">Logout</a>.</p>
 </div>
 {% endblock %}
