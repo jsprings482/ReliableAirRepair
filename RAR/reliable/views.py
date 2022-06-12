@@ -3,7 +3,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect
 from .forms import NewUserForm, RequestForm
 from django.contrib.auth import login, authenticate, logout
-from django.contrib import messages, auth
+from django.contrib import auth
 from django.contrib.auth.forms import AuthenticationForm, PasswordResetForm
 from django.contrib.auth.models import User
 from django.template.loader import render_to_string
@@ -39,11 +39,9 @@ def register(request):
             passw=form.cleaned_data.get('password')
             user = User.objects.create_user(uname, email, passw)
             login(request, user)
-            messages.success(request, "Registation successful.")
             return HttpResponseRedirect(reverse("reliable:index"), {
             "message": "Registration successful.",
                 })
-        messages.error(request, "Registration unsuccessful, please check your information and try again.")
         return HttpResponseRedirect(reverse("reliable:register"), {
         "message": "Registration unsuccessful, please check your information and try again.",
             })
@@ -59,17 +57,14 @@ def logon(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                messages.info(request, f"You are now logged in as {username}.")
                 return HttpResponseRedirect(reverse("reliable:index"), {
                 "message": "You are now logged in as {username}.",
                     })
             else:
-                messages.error(request, "Invalid username or password.")
                 return HttpResponseRedirect(reverse("reliable:logon"), {
                 "message": "Invalid username or password."
                     })
         else:
-            messages.error(request, "Invalid username or password.")
             return HttpResponseRedirect(reverse("reliable:logon"), {
             "message": "Invalid username or password."
                 })
@@ -78,7 +73,6 @@ def logon(request):
 
 def logout(request):
     auth.logout(request)
-    messages.info(request, "You have successfully logged out. Goodbye.")
     return HttpResponseRedirect(reverse("reliable:index"), {
     "message": "You have successfully logged out."
         })
@@ -107,9 +101,7 @@ def password_reset(request):
                         send_mail(subject, email, 'postmaster@sandbox8a5127e16fc94bffa137de60a7f181ca.mailgun.org', [user.email], fail_silently=False)
                     except:
                         return HttpResponse('Invalid header found.')
-                    messages.success(request, "A message with reset password instructions has been sent to your inbox.")
                     return redirect("reliable:password_reset/done")
-                messages.error(request, "An invalid email has been entered.")
     password_reset_form = PasswordResetForm()
     return render(request=request, template_name="reliable/password_reset.html", context={"password_reset_form":password_reset_form})
 
@@ -146,7 +138,6 @@ def service(request):
                  }],
             "conclussion" : "Thank you for responding!",
             })
-            messages.info(request, "Service call has been submitted and a text has been sent to the Technician on-duty. We should be contacting you by phone shortly.")
             return HttpResponseRedirect(reverse('reliable:index'), {
             "message": "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly."
                 })
