@@ -40,9 +40,9 @@ def register(request):
             user = User.objects.create_user(uname, email, passw)
             login(request, user)
             message = "Registration successful."
-            return HttpResponseRedirect(reverse("reliable:index"), {"message": message })
+            return HttpResponseRedirect(reverse("reliable:index"), {"msg": message })
         message = "Registration unsuccessful, please check your information and try again."
-        return HttpResponseRedirect(reverse("reliable:register"), {"message": message })
+        return HttpResponseRedirect(reverse("reliable:register"), {"msg": message })
     form = NewUserForm()
     return render(request=request, template_name="reliable/register.html", context={"register_form":form})
 
@@ -56,20 +56,20 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 message = "You are now logged in as {username}."
-                return HttpResponseRedirect(reverse("reliable:index"), {"message": message })
+                return HttpResponseRedirect(reverse("reliable:index"), {"msg": message })
             else:
                 message =  "Invalid username or password."
-                return HttpResponseRedirect(reverse("reliable:logon"), {"message": message })
+                return HttpResponseRedirect(reverse("reliable:logon"), {"msg": message })
         else:
             message =  "Invalid username or password."
-            return HttpResponseRedirect(reverse("reliable:logon"), {"message": message})
+            return HttpResponseRedirect(reverse("reliable:logon"), {"msg": message})
     form = AuthenticationForm()
     return render(request, 'reliable/login.html', {'form': form})
 
 def logout(request):
     auth.logout(request)
     message = "You have successfully logged out."
-    return HttpResponseRedirect(reverse("reliable:index"), {"message": message})
+    return HttpResponseRedirect(reverse("reliable:index"), {"msg": message})
 
 def password_reset(request):
     if request.method == "POST":
@@ -133,7 +133,7 @@ def service(request):
             "conclussion" : "Thank you for responding!",
             })
             message = "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly to confirm."
-            return HttpResponseRedirect(reverse('reliable:index'), {"message": message })
+            return HttpResponseRedirect(reverse('reliable:index'), {"msg": message })
     form = RequestForm()
     return render(request, 'reliable/service.html', {
         "form": form,
