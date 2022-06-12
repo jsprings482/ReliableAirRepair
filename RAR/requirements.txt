@@ -20,4 +20,4 @@ urllib3==1.26.9
 Werkzeug==2.0.3
 zipp==3.6.0
 pusher==3.2.0
-python==3.10.5
+python==3.10.4
