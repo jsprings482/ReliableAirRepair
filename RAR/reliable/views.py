@@ -132,7 +132,7 @@ def service(request):
                  }],
             "conclussion" : "Thank you for responding!",
             })
-             message = "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly to confirm."
+            message = "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly to confirm."
             return HttpResponseRedirect(reverse('reliable:index'), {"message": message })
     form = RequestForm()
     return render(request, 'reliable/service.html', {
