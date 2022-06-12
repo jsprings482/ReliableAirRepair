@@ -40,9 +40,9 @@ def register(request):
             user = User.objects.create_user(uname, email, passw)
             login(request, user)
             message = "Registration successful."
-            return render(request, "reliable:index", { 'msg' : message })
+            return render(request, "reliable/index.html", { 'msg' : message })
         message = "Registration unsuccessful, please check your information and try again."
-        return render(request, "reliable:register", { 'msg' : message })
+        return render(request, "reliable/register.html", { 'msg' : message })
     form = NewUserForm()
     return render(request=request, template_name="reliable/register.html", context={"register_form":form})
 
@@ -56,20 +56,20 @@ def logon(request):
             if user is not None:
                 login(request, user)
                 message = "You are now logged in as {username}."
-                return render(request, "reliable:index", { 'msg' : message })
+                return render(request, "reliable/index.html", { 'msg' : message })
             else:
                 message =  "Invalid username or password."
-                return render(request, "reliable:logon", { 'msg' : message })
+                return render(request, "reliable/login.html", { 'msg' : message })
         else:
             message =  "Invalid username or password."
-            return render(request, "reliable:logon", { 'msg' : message})
+            return render(request, "reliable/login.html", { 'msg' : message})
     form = AuthenticationForm()
     return render(request, 'reliable/login.html', {'form': form})
 
 def logout(request):
     auth.logout(request)
     message = "You have successfully logged out."
-    return render(request, "reliable:index", { 'msg' : message})
+    return render(request, "reliable/index.html", { 'msg' : message})
 
 def password_reset(request):
     if request.method == "POST":
@@ -133,7 +133,7 @@ def service(request):
             "conclussion" : "Thank you for responding!",
             })
             message = "A service call has been submitted and a text has been sent to the Technician on duty. We should be contacting you by phone shortly to confirm."
-            return render(request, 'reliable:index', {'msg' : message })
+            return render(request, 'reliable/index.html', {'msg' : message })
     form = RequestForm()
     return render(request, 'reliable/service.html', {
         "form": form,
