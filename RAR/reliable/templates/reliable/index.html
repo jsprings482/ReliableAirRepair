@@ -1,17 +1,17 @@
 {% extends 'reliable/layout.html' %}
 {% block body %}
-{% if message != "" %}
-    <div class="w3-center w3-panel w3-xlarge">
+{% if message %}
+    <header class="w3-center w3-panel w3-xlarge w3-black">
         <p>
         {{ message }}
         </p>
-    </div>
+    </header>
 {% endif %}
   <!-- Header/Home -->
-  <header class="w3-container w3-padding-32 w3-center w3transparent" id="home">
+  <div class="w3-container w3-padding-32 w3-center w3transparent" id="home">
     <h1 class="w3-jumbo" style="text-shadow: 2px 2px 5px #a0a0ff;">Reliable Air Repair</h1>
     <p class="w3-xxlarge">Mena, AR <i class="fa fa-snowflake-o w3-large w3-text-blue"></i> <a href="tel:4695921148">(469) 592-1148</a></p>
     <img src="https://i.ibb.co/S71cQ1P/Logo.png" alt="logo" class="w3-image" width="992" height="1108">
-  </header>
+  </div>
  
 {% endblock %}
