@@ -24,7 +24,7 @@ def register(request):
         if form.is_valid():
             uname=form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
-            passw=form.cleaned_data.get('password')
+            passw=form.cleaned_data.get('password1')
             auser = User(username = uname, email = email, password = passw)
             auser.save()
             login(request, user)
