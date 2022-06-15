@@ -73,7 +73,7 @@ def service(request):
             service_call.phone = form.cleaned_data.get('phone')
             service_call.address = form.cleaned_data.get('address')
             service_call.details = form.cleaned_data.get('details')
-            sc = service_call(first_name = service_call.firstname, last_name = service_call.last_name, phone = service_call.phone, address = service_call.address, details = service_call.details)
+            sc = service_call(first_name = service_call.first_name, last_name = service_call.last_name, phone = service_call.phone, address = service_call.address, details = service_call.details)
             sc.save()
             resp = requests.post(TILL_URL, json={
             "phone": ["14695921148"],
