@@ -25,8 +25,7 @@ def register(request):
             uname=form.cleaned_data.get('username')
             email=form.cleaned_data.get('email')
             passw=form.cleaned_data.get('password1')
-            auser = User(username = uname, email = email, password = passw)
-            auser.save()
+            auser = User.objects.create_user(username = uname, email = email, password = passw)
             login(request, auser)
             message = "Registration successful."
             return render(request, "reliable/index.html", { 'msg' : message })
