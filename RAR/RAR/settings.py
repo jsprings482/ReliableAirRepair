@@ -37,8 +37,6 @@ ALLOWED_HOSTS = [
 
 INSTALLED_APPS = [
     'reliable',
-    'gunicorn',
-    'requests',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
